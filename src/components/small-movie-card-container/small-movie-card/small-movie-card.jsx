@@ -1,5 +1,5 @@
 import React from 'react';
-import VideoPlayer from '../video-player/video-player.jsx';
+import VideoPlayer from '../../video-player/video-player.jsx';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 
