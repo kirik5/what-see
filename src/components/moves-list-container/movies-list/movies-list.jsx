@@ -1,6 +1,5 @@
-import React from 'react';
-import SmallMovieCard from '../../small-movie-card-container/small-movie-card/small-movie-card';
-import SmallMovieCardContainer from "../../small-movie-card-container/small-movie-card-container";
+import React from 'react'
+import SmallMovieCardContainer from "../../small-movie-card-container/small-movie-card-container"
 
 
 const MoviesList = ({filmsIds}) => {
@@ -10,6 +9,7 @@ const MoviesList = ({filmsIds}) => {
                 filmsIds.map((id) => {
                     return (
                         <SmallMovieCardContainer
+                            key={id}
                             id={id}
                         />
                     )

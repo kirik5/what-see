@@ -1,4 +1,4 @@
-import {createAsyncThunk, createEntityAdapter, createSelector, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createEntityAdapter, createSlice} from "@reduxjs/toolkit";
 import getFilms from "../api";
 
 
@@ -9,8 +9,7 @@ const initialState = filmsAdapter.getInitialState({
 })
 
 export const fetchFilms = createAsyncThunk('films/fetchFilms', async () => {
-    const response = await getFilms();
-    return response;
+    return await getFilms();
 });
 
 const filmsSlice = createSlice({
@@ -39,3 +38,7 @@ const filmsSlice = createSlice({
 // export const {addActiveQuestionNumber, resetGame} = filmsSlice.actions;
 
 export default filmsSlice.reducer;
+
+export const getFilmsName = id => state => state.films.entities[id].name
+export const getFilmsPreview = id => state => state.films.entities[id].preview_image
+export const getFilmsPreviewVideo = id => state => state.films.entities[id].preview_video_link

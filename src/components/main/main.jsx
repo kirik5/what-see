@@ -1,11 +1,10 @@
-import React from 'react';
-import MoviesList from '../moves-list-container/movies-list/movies-list.jsx';
+import React from 'react'
 import bgGrandBudapest from "./images/bg-the-grand-budapest-hotel.jpg"
 import posterGrandBudapest from "./images/the-grand-budapest-hotel-poster.jpg"
 import avatar from "./images/avatar.jpg"
-import MoviesListContainer from "../moves-list-container/moves-list-container";
+import MoviesListContainer from "../moves-list-container/moves-list-container"
 
-const Main = ({filmsList}) => {
+const Main = () => {
 
   return (
     <React.Fragment>
@@ -102,10 +101,6 @@ const Main = ({filmsList}) => {
           </ul>
 
           <MoviesListContainer/>
-
-          {/*<MoviesList*/}
-          {/*  films={filmsList}*/}
-          {/*/>*/}
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
