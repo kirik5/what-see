@@ -1,0 +1,7 @@
+.movie-card {
+    position: relative;
+    z-index: 1;
+    color: #EEE5B5;
+    padding-bottom: 78px;
+    background: #E1B0B2;
+}

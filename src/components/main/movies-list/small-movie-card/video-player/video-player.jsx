@@ -1,18 +1,9 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 
 
 const VideoPlayer = ({previewVideoLink}) => {
     const videoRef = useRef(null);
-
-    useEffect(() => {
-        const video = videoRef.current;
-
-        video.oncanplaythrough = () => {
-            // video.muted = true;
-            video.play();
-        };
-    }, [])
 
     return (
         <video
@@ -20,6 +11,9 @@ const VideoPlayer = ({previewVideoLink}) => {
             height="175"
             src={previewVideoLink}
             ref={videoRef}
+            muted={true}
+            loop={true}
+            autoPlay={true}
         />
     )
 }

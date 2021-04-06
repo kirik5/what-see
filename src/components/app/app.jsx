@@ -2,25 +2,26 @@ import React from 'react';
 import Main from '../main/main.jsx';
 import FilmDetail from '../film-detail/film-detail.jsx';
 import {Switch, Route} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {getInicializationStatus} from "../../reducers/films-slice";
 
 
 const App = () => {
-    return (
+    const isInitialization = useSelector(getInicializationStatus)
+
+    return isInitialization === 'succeeded' ? (
         <Switch>
-            <Route exact path="/" >
+            <Route exact path="/">
                 <Main/>
             </Route>
             <Route
-                path="/films/:name"
-                exact
+                path="/films/:id"
                 render={({match}) =>
-                    <FilmDetail
-                        // detail={films.find((film) => film.name.toLowerCase() === match.params.name)}
-                    />
+                    <FilmDetail id={match.params.id}/>
                 }
             />
         </Switch>
-    );
+    ) : <div>Inicializing... Please wait...</div>
 };
 
 export default App;
