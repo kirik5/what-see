@@ -1,16 +1,15 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {isErrorLoadingFilms} from "../../../reducers/films-slice";
+import {getFilmsIds, isErrorLoadingFilms} from "../../../reducers/films-slice";
 import SmallMovieCard from "./small-movie-card/small-movie-card";
 
-const MoviesList = () => {
+const MoviesList = ({genreType}) => {
 
-    const isLoading = useSelector(state => state.films.status)
-    const filmsIds = useSelector(state => state.films.ids)
+    const filmsIds = useSelector(getFilmsIds(genreType))
     const isErrorLoadingFilmsList = useSelector(isErrorLoadingFilms)
 
+
     return <>
-        {isLoading === "loading" && <div>Loading...</div>}
         {isErrorLoadingFilmsList ?
             <div>isErrorLoadingFilmsList</div> :
             <div className="catalog__movies-list">

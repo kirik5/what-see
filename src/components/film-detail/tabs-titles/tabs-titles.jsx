@@ -1,6 +1,6 @@
 import React from "react"
-import {Route, Link, useLocation, Redirect, Switch} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {Route, Link, Redirect, Switch, useRouteMatch} from "react-router-dom"
+import {useSelector} from "react-redux"
 import {
     getFimlsDescription,
     getFimlsDirector, getFimlsGenre,
@@ -11,10 +11,13 @@ import {
 
 const TabTitle = ({filmId, title}) => {
 
-    let url = useLocation().pathname
+    // let url = useLocation().pathname
+    const match = useRouteMatch({
+        path: `/films/${filmId}/${title.toLowerCase()}`
+    })
 
     const classes = [`movie-nav__item`];
-    (url.includes(title.toLowerCase())) && classes.push(`movie-nav__item--active`);
+    match && classes.push(`movie-nav__item--active`);
 
     return (
         <li className={classes.join(` `)}>
@@ -199,7 +202,7 @@ const Actors = ({content}) => {
 const Tabs = ({filmId}) => {
     const tabsTitle = ['Overviews', 'Details', 'Reviews']
 
-    const url = useLocation().pathname;
+    // const url = useLocation().pathname;
 
     const filmsDescription = useSelector(getFimlsDescription(filmId))
     const filmsRating = useSelector(getFimlsRating(filmId))

@@ -3,25 +3,39 @@ import Main from '../main/main.jsx';
 import FilmDetail from '../film-detail/film-detail.jsx';
 import {Switch, Route} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {getInicializationStatus} from "../../reducers/films-slice";
+import {getInitializingStatus} from "../../reducers/films-slice";
+import Loading from "../common/loading/loading";
+import ErrorLoading from "../common/error-loading/error-loading";
 
 
 const App = () => {
-    const isInitialization = useSelector(getInicializationStatus)
+    const isInitialization = useSelector(getInitializingStatus)
 
-    return isInitialization === 'succeeded' ? (
-        <Switch>
-            <Route exact path="/">
-                <Main/>
-            </Route>
-            <Route
-                path="/films/:id"
-                render={({match}) =>
-                    <FilmDetail id={match.params.id}/>
-                }
-            />
-        </Switch>
-    ) : <div>Inicializing... Please wait...</div>
+    return (
+        <>
+            {isInitialization === 'loading' && <Loading/>}
+            {isInitialization === 'succeeded' && (
+                <Switch>
+                    <Route exact path="/">
+                        <Main/>
+                    </Route>
+                    <Route
+                        path="/films/:id"
+                        render={({match}) =>
+                            <FilmDetail id={match.params.id}/>
+                        }
+                    />
+                    <Route path="/genre/:type"
+                           render={({match}) =>
+                               <Main genreType={match.params.type}/>
+                           }
+                    />
+                </Switch>)
+            }
+            {isInitialization === 'failed' && <ErrorLoading/>}
+        </>
+    )
+
 };
 
 export default App;
