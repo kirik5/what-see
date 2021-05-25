@@ -6,6 +6,7 @@ import {useSelector} from "react-redux";
 import {getInitializingStatus} from "../../reducers/films-slice";
 import Loading from "../common/loading/loading";
 import ErrorLoading from "../common/error-loading/error-loading";
+import FullVideoPlayer from "../full-video-player/full-video-player";
 
 
 const App = () => {
@@ -30,6 +31,9 @@ const App = () => {
                                <Main genreType={match.params.type}/>
                            }
                     />
+                    <Route path="/play">
+                        <FullVideoPlayer/>
+                    </Route>
                 </Switch>)
             }
             {isInitialization === 'failed' && <ErrorLoading/>}

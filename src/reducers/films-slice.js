@@ -9,7 +9,6 @@ const initialState = filmsAdapter.getInitialState({
     error: null,
     countOfFilmsInPage: 8,
     genre: 'all genres',
-    allGenres: [],
 })
 
 export const fetchFilms = createAsyncThunk('films/fetchFilms', async () => {
@@ -35,7 +34,7 @@ const filmsSlice = createSlice({
             .addCase(fetchFilms.fulfilled, (state, action) => {
                 filmsAdapter.setAll(state, action.payload)
                 state.status = 'succeeded'
-                state.allGenres = getGenres(action.payload)
+                // state.allGenres = getGenres(action.payload)
             })
             .addCase(fetchFilms.rejected, (state, action) => {
                 state.status = 'failed'
@@ -49,22 +48,18 @@ export const {addCountOfFilmsInPage, resetCountOfFilmsInPage} = filmsSlice.actio
 export default filmsSlice.reducer;
 
 
-const getGenres = (filmsArray) => {
-    let allGenres = new Set()
-
-    filmsArray.forEach(film => {
-        allGenres.add(film.genre)
-    })
-
-    const c = []
-    c.unshift(111)
-    console.log(c)
-
-    allGenres = [...allGenres].sort((a, b) => a > b ? 1 : -1)
-    allGenres.unshift('All genres')
-
-    return allGenres
-}
+// const getGenres = (filmsArray) => {
+//     let allGenres = new Set()
+//
+//     filmsArray.forEach(film => {
+//         allGenres.add(film.genre)
+//     })
+//
+//     allGenres = [...allGenres].sort((a, b) => a > b ? 1 : -1)
+//     allGenres.unshift('All genres')
+//
+//     return allGenres
+// }
 
 
 const {
@@ -119,6 +114,19 @@ export const canShowMore = (genreType) => createSelector(
     }
 )
 
+export const getAllGenres = createSelector(
+    state => Object.values(state.films.entities),
+    filmsArray => {
+        let allGenres = new Set()
+        filmsArray.forEach(film => {
+            allGenres.add(film.genre)
+        })
+        allGenres = [...allGenres].sort((a, b) => a > b ? 1 : -1)
+        allGenres.unshift('All genres')
+        return allGenres
+    }
+)
+
 export const getFilmsName = id => state => state.films.entities[id].name
 export const getFilmsPreview = id => state => state.films.entities[id].preview_image
 export const getFilmsPreviewVideo = id => state => state.films.entities[id].preview_video_link
@@ -132,7 +140,7 @@ export const getFimlsReleased = id => state => selectFilmById(state, id).release
 export const getFimlsDirector = id => state => selectFilmById(state, id).director
 export const getFimlsStarring = id => state => selectFilmById(state, id).starring
 export const getFimlsRunTime = id => state => selectFilmById(state, id).run_time
-export const getAllGenres = state => state.films.allGenres
-
+export const getFilmsFullLink = id => state => selectFilmById(state, id).video_link
 export const isErrorLoadingFilms = state => state.films.error
 export const getInitializingStatus = state => state.films.status
+

@@ -10,15 +10,12 @@ import {
 
 
 const TabTitle = ({filmId, title}) => {
-
-    // let url = useLocation().pathname
     const match = useRouteMatch({
         path: `/films/${filmId}/${title.toLowerCase()}`
     })
 
-    const classes = [`movie-nav__item`];
-    match && classes.push(`movie-nav__item--active`);
-
+    const classes = [`movie-nav__item`]
+    match && classes.push(`movie-nav__item--active`)
     return (
         <li className={classes.join(` `)}>
             <Link to={`/films/${filmId}/${title.toLowerCase()}`} className="movie-nav__link">{title}</Link>
@@ -202,8 +199,6 @@ const Actors = ({content}) => {
 const Tabs = ({filmId}) => {
     const tabsTitle = ['Overviews', 'Details', 'Reviews']
 
-    // const url = useLocation().pathname;
-
     const filmsDescription = useSelector(getFimlsDescription(filmId))
     const filmsRating = useSelector(getFimlsRating(filmId))
     const filmsDirector = useSelector(getFimlsDirector(filmId))
@@ -231,29 +226,28 @@ const Tabs = ({filmId}) => {
 
             <Switch>
                 <Route path="/films/:id/:title"
-                       render={({match}) => (
-                               <>
-                                   {match.params.title === tabsTitle[0].toLowerCase() &&
-                                   <Overviews
-                                       filmsRating={filmsRating}
-                                       filmsDescription={filmsDescription}
-                                       filmsDirector={filmsDirector}
-                                       filmsStarring={filmsStarring}/>}
+                    render={({match}) => (
+                        <>
+                           {match.params.title === tabsTitle[0].toLowerCase() &&
+                           <Overviews
+                               filmsRating={filmsRating}
+                               filmsDescription={filmsDescription}
+                               filmsDirector={filmsDirector}
+                               filmsStarring={filmsStarring}/>}
 
-                                   {match.params.title === tabsTitle[1].toLowerCase() &&
-                                   <Details
-                                       filmsDirector={filmsDirector}
-                                       filmsGenre={filmsGenre}
-                                       filmsStarring={filmsStarring}
-                                       filmsRunTime={filmsRunTime}
-                                       filmsReleased={filmsReleased}/>}
+                           {match.params.title === tabsTitle[1].toLowerCase() &&
+                           <Details
+                               filmsDirector={filmsDirector}
+                               filmsGenre={filmsGenre}
+                               filmsStarring={filmsStarring}
+                               filmsRunTime={filmsRunTime}
+                               filmsReleased={filmsReleased}/>}
 
-                                   {match.params.title === tabsTitle[2].toLowerCase() &&
-                                   <Reviews/>}
-
-                               </>
-                           )
-                       }
+                           {match.params.title === tabsTitle[2].toLowerCase() &&
+                           <Reviews/>}
+                        </>
+                       )
+                    }
                 />
 
                 <Route path="/films/:id">

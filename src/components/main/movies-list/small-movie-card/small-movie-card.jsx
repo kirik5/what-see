@@ -14,6 +14,14 @@ const SmallMovieCard = ({id}) => {
     const [activeFilm, setActiveFilm] = useState(false)
     const [timerId, setTimerId] = useState(null)
 
+    // useEffect(() => {
+    //     const scrollHandler = (e) => console.log('scroll ', e)
+    //     window.addEventListener('scroll', scrollHandler )
+    //     return () => {
+    //         window.removeEventListener('scroll', scrollHandler)
+    //     }
+    // })
+
     useEffect(() => {
         return () => {
             if (timerId) clearTimeout(timerId)
@@ -21,6 +29,7 @@ const SmallMovieCard = ({id}) => {
     }, [timerId])
 
     const setActiveFilmHandler = () => {
+        console.log('in')
         setTimerId(setTimeout(() => {
             setActiveFilm(true)
             setTimerId(null)
@@ -28,6 +37,7 @@ const SmallMovieCard = ({id}) => {
     }
 
     const removeActiveFilmHandler = () => {
+        console.log('out')
         if (!timerId) {
             setActiveFilm(false)
         } else {

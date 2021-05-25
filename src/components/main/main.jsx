@@ -22,9 +22,13 @@ const Main = ({genreType}) => {
             <section className="catalog">
                 <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-                <FilmsFilter genreType={genreType}/>
+                <FilmsFilter
+                    genreType={genreType}
+                />
 
-                <MoviesList genreType={genreType}/>
+                <MoviesList
+                    genreType={genreType}
+                />
 
                 {canShow && <ShowMore/>}
 

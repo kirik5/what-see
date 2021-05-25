@@ -4,7 +4,7 @@ const getFilms = () => new Promise((resolve, reject) => {
     setTimeout(() => {
         resolve(films)
         // reject('Server is not availabled!!!')
-    }, 2000)
+    }, 1000)
 })
 
 export default getFilms

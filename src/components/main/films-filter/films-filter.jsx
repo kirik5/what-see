@@ -3,11 +3,10 @@ import {Link} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 import {getAllGenres, resetCountOfFilmsInPage} from "../../../reducers/films-slice"
 
+
 const FilmsFilter = ({genreType}) => {
     const allGenres = useSelector(getAllGenres)
-
     const dispatch = useDispatch()
-
     const clickLinkHandler = () => {
         dispatch(resetCountOfFilmsInPage())
     }
@@ -28,7 +27,13 @@ const FilmsFilter = ({genreType}) => {
                 return (
                     <li key={index}
                         className={`catalog__genres-item ${classNameActive}`}>
-                        <Link to={to} className="catalog__genres-link" onClick={clickLinkHandler}>{genre}</Link>
+                        <Link
+                            to={to}
+                            className="catalog__genres-link"
+                            onClick={clickLinkHandler}
+                        >
+                            {genre}
+                        </Link>
                     </li>
                 )
             })}

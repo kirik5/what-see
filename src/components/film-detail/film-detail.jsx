@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import {useSelector} from "react-redux"
 import {
     getFilmsName,
@@ -7,22 +7,28 @@ import {
     getFimlsGenre,
     getFimlsPoster, getFimlsReleased
 } from "../../reducers/films-slice"
-import VisuallyHidden from "../common/visually-hidden/visually-hidden";
-import Tabs from "./tabs-titles/tabs-titles";
-import PageFooter from "../common/page-footer/page-footer";
-import Logo from "../common/logo/logo";
-import Avatar from "../common/avatar/avatar";
-import CatalogLikeThis from "../common/catalog-like-this/catalog-like-this";
+import VisuallyHidden from "../common/visually-hidden/visually-hidden"
+import Tabs from "./tabs/tabs"
+import PageFooter from "../common/page-footer/page-footer"
+import Logo from "../common/logo/logo"
+import Avatar from "../common/avatar/avatar"
+import CatalogLikeThis from "../common/catalog-like-this/catalog-like-this"
+import ButtonPlay from "../common/button-play/button-play"
+import ButtonMyList from "../common/button-my-list/button-my-list"
 
 
 const FilmDetail = ({id}) => {
-
     const filmsName = useSelector(getFilmsName(id))
     const filmsPoster = useSelector(getFimlsPoster(id))
     const filmsBg = useSelector(getFimlsBg(id))
     const filmsBgColor = useSelector(getFimlsBgColor(id))
     const filmsGenre = useSelector(getFimlsGenre(id))
     const filmsReleased = useSelector(getFimlsReleased(id))
+
+    useEffect(() => {
+        window.scrollTo(0,0)
+    }, [])
+
 
     return <>
         <VisuallyHidden/>
@@ -51,18 +57,14 @@ const FilmDetail = ({id}) => {
                         </p>
 
                         <div className="movie-card__buttons">
-                            <button className="btn btn--play movie-card__button" type="button">
-                                <svg viewBox="0 0 19 19" width="19" height="19">
-                                    <use xlinkHref="#play-s"></use>
-                                </svg>
-                                <span>Play</span>
-                            </button>
-                            <button className="btn btn--list movie-card__button" type="button">
-                                <svg viewBox="0 0 19 20" width="19" height="20">
-                                    <use xlinkHref="#add"></use>
-                                </svg>
-                                <span>My list</span>
-                            </button>
+
+                            <ButtonPlay
+                                filmId={id}
+                            />
+
+                            <ButtonMyList
+                            />
+
                             <a href="add-review.html" className="btn movie-card__button">Add review</a>
                         </div>
                     </div>
