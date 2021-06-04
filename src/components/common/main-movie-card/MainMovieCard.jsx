@@ -3,6 +3,7 @@ import React from "react"
 import bgGrandBudapest from "../../../images/bg-the-grand-budapest-hotel.jpg"
 import posterGrandBudapest from "../../../images/the-grand-budapest-hotel-poster.jpg"
 import avatar from "../../../images/avatar.jpg"
+import Logo from "../logo/logo";
 
 const MainMovieCard = () => {
     return (
@@ -14,13 +15,8 @@ const MainMovieCard = () => {
             <h1 className="visually-hidden">WTW</h1>
 
             <header className="page-header movie-card__head">
-                <div className="logo">
-                    <a className="logo__link" href="/">
-                        <span className="logo__letter logo__letter--1">W</span>
-                        <span className="logo__letter logo__letter--2">T</span>
-                        <span className="logo__letter logo__letter--3">W</span>
-                    </a>
-                </div>
+
+                <Logo/>
 
                 <div className="user-block">
                     <div className="user-block__avatar">

@@ -5,6 +5,7 @@ import {getFilmsFullLink, getFilmsName, getFilmsPreview} from "../../reducers/fi
 import VisuallyHidden from "../common/visually-hidden/visually-hidden";
 import VideoPlayer from "./video-player/video-player";
 import ExitButton from "./exit-button/exit-button";
+import withRedirectToLogin from "../../hoc/redirect-to-login";
 
 
 const FullVideoPlayer = () => {
@@ -35,4 +36,4 @@ const FullVideoPlayer = () => {
     )
 }
 
-export default FullVideoPlayer
+export default withRedirectToLogin(FullVideoPlayer)

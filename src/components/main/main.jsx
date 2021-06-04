@@ -1,5 +1,4 @@
 import React from 'react'
-
 import MoviesList from "./movies-list/movies-list"
 import VisuallyHidden from "../common/visually-hidden/visually-hidden"
 import MainMovieCard from "../common/main-movie-card/MainMovieCard"
@@ -8,9 +7,10 @@ import PageFooter from "../common/page-footer/page-footer"
 import ShowMore from "./ShowMore/show-more"
 import {useSelector} from "react-redux"
 import {canShowMore} from "../../reducers/films-slice"
+import withRedirectToLogin from "../../hoc/redirect-to-login";
+
 
 const Main = ({genreType}) => {
-
     const canShow = useSelector(canShowMore(genreType))
 
 
@@ -39,4 +39,4 @@ const Main = ({genreType}) => {
     </>
 };
 
-export default Main;
+export default withRedirectToLogin(Main)

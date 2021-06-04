@@ -1,5 +1,5 @@
 import {createAsyncThunk, createEntityAdapter, createSelector, createSlice} from "@reduxjs/toolkit";
-import getFilms from "../api";
+import serverAPI from "../api-mock";
 
 
 const filmsAdapter = createEntityAdapter()
@@ -12,7 +12,7 @@ const initialState = filmsAdapter.getInitialState({
 })
 
 export const fetchFilms = createAsyncThunk('films/fetchFilms', async () => {
-    return await getFilms();
+    return await serverAPI.getFilms();
 });
 
 const filmsSlice = createSlice({
@@ -34,7 +34,6 @@ const filmsSlice = createSlice({
             .addCase(fetchFilms.fulfilled, (state, action) => {
                 filmsAdapter.setAll(state, action.payload)
                 state.status = 'succeeded'
-                // state.allGenres = getGenres(action.payload)
             })
             .addCase(fetchFilms.rejected, (state, action) => {
                 state.status = 'failed'
@@ -46,20 +45,6 @@ const filmsSlice = createSlice({
 export const {addCountOfFilmsInPage, resetCountOfFilmsInPage} = filmsSlice.actions;
 
 export default filmsSlice.reducer;
-
-
-// const getGenres = (filmsArray) => {
-//     let allGenres = new Set()
-//
-//     filmsArray.forEach(film => {
-//         allGenres.add(film.genre)
-//     })
-//
-//     allGenres = [...allGenres].sort((a, b) => a > b ? 1 : -1)
-//     allGenres.unshift('All genres')
-//
-//     return allGenres
-// }
 
 
 const {
@@ -143,4 +128,5 @@ export const getFimlsRunTime = id => state => selectFilmById(state, id).run_time
 export const getFilmsFullLink = id => state => selectFilmById(state, id).video_link
 export const isErrorLoadingFilms = state => state.films.error
 export const getInitializingStatus = state => state.films.status
+export const isAutorizationRequired = state => state.films.isAuthorizationRequired
 
