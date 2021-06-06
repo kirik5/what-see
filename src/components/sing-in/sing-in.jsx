@@ -5,11 +5,14 @@ import Logo from "../common/logo/logo";
 import SingInForm from "./sing-in-form/sing-in-form";
 import {useDispatch} from "react-redux";
 import {login} from "../../reducers/authorization-slice";
-import withRedirectToRoot from "../../hoc/redirect-to-root";
+import {useHistory} from "react-router-dom";
 
 
 const SingIn = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
+
+    console.log(history)
 
     const submitHandler = (value) => {
         dispatch(login({
@@ -47,4 +50,4 @@ const SingIn = () => {
 }
 
 
-export default withRedirectToRoot(SingIn)
+export default SingIn

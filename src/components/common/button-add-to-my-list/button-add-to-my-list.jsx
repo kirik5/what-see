@@ -1,14 +1,22 @@
 import React from "react"
 import {addRemoveFilmInList, isFilmInFavoriteList} from "../../../reducers/myfilmlist-slice";
 import {useDispatch, useSelector} from "react-redux";
+import {isAuthorized} from "../../../reducers/authorization-slice";
+import {useHistory} from "react-router-dom";
 
 const ButtonAddToMyList = ({id}) => {
     const dispatch = useDispatch()
     const isInFavoriteFilms = useSelector(isFilmInFavoriteList(id))
+    const isUserAuthorized = useSelector(isAuthorized)
+    const history = useHistory()
     const xlink = isInFavoriteFilms ? "in-list" : "add"
 
     const addRemoveFromFavoriteListHandler = () => {
-        dispatch(addRemoveFilmInList(id))
+        if (!isUserAuthorized) {
+            history.push('/login')
+        } else {
+            dispatch(addRemoveFilmInList(id))
+        }
     }
 
     return (

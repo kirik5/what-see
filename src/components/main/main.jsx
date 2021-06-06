@@ -18,7 +18,7 @@ const Main = ({genreType}) => {
 
         {initializationStatus === 'succeeded' && (
             <MainMovieCard
-                id={1}
+                id={15}
             />
         )}
 

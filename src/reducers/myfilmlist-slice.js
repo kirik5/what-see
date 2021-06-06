@@ -14,9 +14,7 @@ const myFilmListSlice = createSlice({
             state.favoriteFilms.push(Number(action.payload))
         },
         removeFilm(state, action) {
-            console.log('number of film', action.payload)
             const elementIndex = state.favoriteFilms.indexOf(action.payload)
-            console.log('index', elementIndex)
             state.favoriteFilms.splice(elementIndex, 1)
         },
         clearFavoriteFilms(state) {

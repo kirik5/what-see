@@ -7,6 +7,7 @@ import MyFavoriteMoviesList from "../main/movies-list/my-favorite-movies-list";
 import ShowMore from "../main/ShowMore/show-more";
 import {canShowMoreOfFavorite} from "../../reducers/myfilmlist-slice";
 import {useSelector} from "react-redux";
+import withRedirectToLogin from "../../hoc/redirect-to-login";
 
 
 const MyFilmList = (props) => {
@@ -45,4 +46,4 @@ const MyFilmList = (props) => {
     )
 }
 
-export default MyFilmList
+export default withRedirectToLogin(MyFilmList)

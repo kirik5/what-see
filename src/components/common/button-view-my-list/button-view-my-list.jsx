@@ -5,8 +5,7 @@ import {useHistory} from "react-router-dom";
 const ButtonViewMyList = () => {
     const history = useHistory()
 
-    const viewMyListHandler = (evt) => {
-        evt.preventDefault()
+    const viewMyListHandler = () => {
         history.push('/mylist')
     }
 

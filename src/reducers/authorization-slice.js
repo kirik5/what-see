@@ -14,6 +14,7 @@ export const login = (mailPass) => async (dispatch) => {
     try {
         const response = await serverAPI.authorizing(mailPass)
         dispatch(fulfilled(response))
+        window.history.back()
     } catch (err) {
         dispatch(stopSubmit('authorisingUser', {
             _error: err,
