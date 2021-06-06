@@ -93,11 +93,10 @@ export const canShowMore = (genreType) => createSelector(
     getAllFilmsIdsLength(genreType),
     state => state.films.countOfFilmsInPage,
     (allSelectedFilmsIdsLength, countOfFilmsInPage) => {
-
         return (countOfFilmsInPage < allSelectedFilmsIdsLength)
-
     }
 )
+
 
 export const getAllGenres = createSelector(
     state => Object.values(state.films.entities),
@@ -128,5 +127,5 @@ export const getFimlsRunTime = id => state => selectFilmById(state, id).run_time
 export const getFilmsFullLink = id => state => selectFilmById(state, id).video_link
 export const isErrorLoadingFilms = state => state.films.error
 export const getInitializingStatus = state => state.films.status
-export const isAutorizationRequired = state => state.films.isAuthorizationRequired
+// export const isAutorizationRequired = state => state.films.isAuthorizationRequired
 

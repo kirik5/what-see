@@ -1,5 +1,5 @@
 import {useSelector} from "react-redux";
-import {isAuthorized} from "../reducers/autorization-slice";
+import {isAuthorized} from "../reducers/authorization-slice";
 import {Redirect} from "react-router-dom";
 
 const withRedirectToRoot = (Component) => {

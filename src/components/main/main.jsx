@@ -1,22 +1,27 @@
 import React from 'react'
-import MoviesList from "./movies-list/movies-list"
 import VisuallyHidden from "../common/visually-hidden/visually-hidden"
 import MainMovieCard from "../common/main-movie-card/MainMovieCard"
 import FilmsFilter from "./films-filter/films-filter"
 import PageFooter from "../common/page-footer/page-footer"
 import ShowMore from "./ShowMore/show-more"
 import {useSelector} from "react-redux"
-import {canShowMore} from "../../reducers/films-slice"
-import withRedirectToLogin from "../../hoc/redirect-to-login";
+import {canShowMore, getInitializingStatus} from "../../reducers/films-slice"
+import GenreMoviesList from "./movies-list/genre-movies-list";
 
 
 const Main = ({genreType}) => {
     const canShow = useSelector(canShowMore(genreType))
-
+    const initializationStatus = useSelector(getInitializingStatus)
 
     return <>
         <VisuallyHidden/>
-        <MainMovieCard/>
+
+        {initializationStatus === 'succeeded' && (
+            <MainMovieCard
+                id={1}
+            />
+        )}
+
 
         <div className="page-content">
             <section className="catalog">
@@ -26,11 +31,13 @@ const Main = ({genreType}) => {
                     genreType={genreType}
                 />
 
-                <MoviesList
+                <GenreMoviesList
                     genreType={genreType}
                 />
 
-                {canShow && <ShowMore/>}
+                {canShow && <ShowMore
+                    from={'main'}
+                />}
 
             </section>
 
@@ -39,4 +46,4 @@ const Main = ({genreType}) => {
     </>
 };
 
-export default withRedirectToLogin(Main)
+export default Main

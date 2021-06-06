@@ -9,10 +9,7 @@ const ButtonPlay = ({filmId}) => {
     }
 
     return (
-        <button className="btn btn--play movie-card__button" type="button" onClick={clickPlayHandler}>
-            <svg viewBox="0 0 19 19" width="19" height="19">
-                <use xlinkHref="#play-s"></use>
-            </svg>
+        <button className="btn btn--play movie-card__button" type="button" onClick={clickPlayHandler} style={{justifyContent: 'center'}}>
             <span>Play</span>
         </button>
     )

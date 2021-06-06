@@ -4,7 +4,7 @@ import PageFooter from "../common/page-footer/page-footer"
 import Logo from "../common/logo/logo";
 import SingInForm from "./sing-in-form/sing-in-form";
 import {useDispatch} from "react-redux";
-import {login} from "../../reducers/autorization-slice";
+import {login} from "../../reducers/authorization-slice";
 import withRedirectToRoot from "../../hoc/redirect-to-root";
 
 

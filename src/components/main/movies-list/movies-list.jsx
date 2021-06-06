@@ -1,31 +1,29 @@
 import React from "react";
-import {useSelector} from "react-redux";
-import {getFilmsIds, isErrorLoadingFilms} from "../../../reducers/films-slice";
 import SmallMovieCard from "./small-movie-card/small-movie-card";
+import ErrorLoading from "../../common/error-loading/error-loading";
 
-const MoviesList = ({genreType}) => {
+const MoviesList = ({filmsIds, isErrorLoadingFilmsList}) => {
 
-    const filmsIds = useSelector(getFilmsIds(genreType))
-    const isErrorLoadingFilmsList = useSelector(isErrorLoadingFilms)
+    return (
+        <>
+            {isErrorLoadingFilmsList ?
+                <ErrorLoading/> :
+                <div className="catalog__movies-list">
 
+                    {filmsIds.map((id) => {
+                        return (
+                            <SmallMovieCard
+                                key={id}
+                                id={id}
+                            />
+                        )
+                    })
+                    }
 
-    return <>
-        {isErrorLoadingFilmsList ?
-            <div>isErrorLoadingFilmsList</div> :
-            <div className="catalog__movies-list">
-
-                {filmsIds.map((id) => {
-                    return (
-                        <SmallMovieCard
-                            key={id}
-                            id={id}
-                        />
-                    )
-                })
-                }
-
-            </div>}
-    </>
+                </div>
+            }
+        </>
+    )
 }
 
-export default MoviesList;
+export default MoviesList

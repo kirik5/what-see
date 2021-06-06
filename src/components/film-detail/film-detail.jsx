@@ -14,11 +14,8 @@ import Logo from "../common/logo/logo"
 import Avatar from "../common/avatar/avatar"
 import CatalogLikeThis from "../common/catalog-like-this/catalog-like-this"
 import ButtonPlay from "../common/button-play/button-play"
-import ButtonMyList from "../common/button-my-list/button-my-list"
-import {Redirect} from "react-router-dom";
-import {isAuthorized} from "../../reducers/autorization-slice";
-import withRedirectToLogin from "../../hoc/redirect-to-login";
-
+import ButtonAddToMyList from "../common/button-add-to-my-list/button-add-to-my-list"
+import ButtonViewMyList from "../common/button-view-my-list/button-view-my-list";
 
 
 const FilmDetail = ({id}) => {
@@ -28,7 +25,6 @@ const FilmDetail = ({id}) => {
     const filmsBgColor = useSelector(getFimlsBgColor(id))
     const filmsGenre = useSelector(getFimlsGenre(id))
     const filmsReleased = useSelector(getFimlsReleased(id))
-    const isUserAuthorized = useSelector(isAuthorized)
 
     useEffect(() => {
         window.scrollTo(0,0)
@@ -67,8 +63,11 @@ const FilmDetail = ({id}) => {
                                 filmId={id}
                             />
 
-                            <ButtonMyList
+                            <ButtonAddToMyList
+                                id={id}
                             />
+
+                            <ButtonViewMyList/>
 
                             <a href="add-review.html" className="btn movie-card__button">Add review</a>
                         </div>
@@ -101,4 +100,4 @@ const FilmDetail = ({id}) => {
     </>
 }
 
-export default withRedirectToLogin(FilmDetail);
+export default FilmDetail;

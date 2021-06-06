@@ -1,12 +1,17 @@
 import React from "react"
 import {useDispatch} from "react-redux";
 import {addCountOfFilmsInPage} from "../../../reducers/films-slice";
+import {addCountOfFavoriteFilmsInPage} from "../../../reducers/myfilmlist-slice";
 
-const ShowMore = () => {
+const ShowMore = ({from}) => {
     const dispatch = useDispatch()
 
     const moreFilmsHandler = () => {
-        dispatch(addCountOfFilmsInPage())
+        if (from === 'main') {
+            dispatch(addCountOfFilmsInPage())
+        } else if (from === 'my-list') {
+            dispatch(addCountOfFavoriteFilmsInPage())
+        }
     }
 
     return (

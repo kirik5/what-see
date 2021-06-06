@@ -1,7 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import serverAPI from "../api-mock";
 import {stopSubmit} from "redux-form";
-import {fetchFilms} from "./films-slice";
 
 const initialState = {
     status: 'idle',
@@ -10,12 +9,11 @@ const initialState = {
 }
 
 
-export const login = (mailPass) => async (dispatch, getState) => {
+export const login = (mailPass) => async (dispatch) => {
     dispatch(loading())
     try {
         const response = await serverAPI.authorizing(mailPass)
         dispatch(fulfilled(response))
-        dispatch(fetchFilms())
     } catch (err) {
         dispatch(stopSubmit('authorisingUser', {
             _error: err,
@@ -24,7 +22,7 @@ export const login = (mailPass) => async (dispatch, getState) => {
     }
 }
 
-const autorizationSlice = createSlice({
+const authorizationSlice = createSlice({
     name: 'authorization',
     initialState,
     reducers: {
@@ -39,12 +37,17 @@ const autorizationSlice = createSlice({
             state.status = 'failed'
             state.error = action.payload
         },
+        logout(state) {
+            state.status = 'idle'
+            state.error = null
+            state.user = null
+        }
     },
 })
 
-export const {loading, fulfilled, failed} = autorizationSlice.actions;
+export const {loading, fulfilled, failed, logout} = authorizationSlice.actions;
 
-export default autorizationSlice.reducer
+export default authorizationSlice.reducer
 
 
 export const isAuthorized = state => !!state.authorization.user
