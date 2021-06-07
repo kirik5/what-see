@@ -1,6 +1,6 @@
 import React from "react"
 import {useDispatch} from "react-redux";
-import {addCountOfFilmsInPage} from "../../../reducers/films-slice";
+import {addCountOfFilmsInLikePage, addCountOfFilmsInPage} from "../../../reducers/films-slice";
 import {addCountOfFavoriteFilmsInPage} from "../../../reducers/myfilmlist-slice";
 
 const ShowMore = ({from}) => {
@@ -11,6 +11,8 @@ const ShowMore = ({from}) => {
             dispatch(addCountOfFilmsInPage())
         } else if (from === 'my-list') {
             dispatch(addCountOfFavoriteFilmsInPage())
+        } else if (from === 'like') {
+            dispatch(addCountOfFilmsInLikePage())
         }
     }
 

@@ -5,14 +5,10 @@ import Logo from "../common/logo/logo";
 import SingInForm from "./sing-in-form/sing-in-form";
 import {useDispatch} from "react-redux";
 import {login} from "../../reducers/authorization-slice";
-import {useHistory} from "react-router-dom";
 
 
 const SingIn = () => {
     const dispatch = useDispatch()
-    const history = useHistory()
-
-    console.log(history)
 
     const submitHandler = (value) => {
         dispatch(login({

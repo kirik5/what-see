@@ -69,7 +69,6 @@ const FilmDetail = ({id}) => {
 
                             <ButtonViewMyList/>
 
-                            <a href="add-review.html" className="btn movie-card__button">Add review</a>
                         </div>
                     </div>
                 </div>
@@ -93,7 +92,10 @@ const FilmDetail = ({id}) => {
         </section>
 
         <div className="page-content">
-            <CatalogLikeThis/>
+
+            <CatalogLikeThis
+                filmsGenre={filmsGenre}
+            />
 
             <PageFooter/>
         </div>

@@ -8,6 +8,7 @@ const initialState = filmsAdapter.getInitialState({
     status: 'idle',
     error: null,
     countOfFilmsInPage: 8,
+    countOfFilmsInLikePage: 8,
     genre: 'all genres',
 })
 
@@ -22,8 +23,14 @@ const filmsSlice = createSlice({
         addCountOfFilmsInPage(state) {
             state.countOfFilmsInPage += 8;
         },
+        addCountOfFilmsInLikePage(state) {
+            state.countOfFilmsInLikePage += 8;
+        },
         resetCountOfFilmsInPage(state) {
             state.countOfFilmsInPage = 8;
+        },
+        resetCountOfFilmsInLikePage(state) {
+            state.countOfFilmsInLikePage = 8;
         }
     },
     extraReducers: builder => {
@@ -42,7 +49,7 @@ const filmsSlice = createSlice({
     },
 });
 
-export const {addCountOfFilmsInPage, resetCountOfFilmsInPage} = filmsSlice.actions;
+export const {addCountOfFilmsInPage, resetCountOfFilmsInPage, addCountOfFilmsInLikePage, resetCountOfFilmsInLikePage} = filmsSlice.actions;
 
 export default filmsSlice.reducer;
 
@@ -73,11 +80,31 @@ export const getFilmsIds = (genreType) => createSelector(
     }
 )
 
+export const getLikeFilmsIds = (genreType) => createSelector(
+    state => state.films.ids,
+    selectFilms,
+    state => state.films.countOfFilmsInLikePage,
+    (allFilmsIds, allFilms, countOfFilmsInLikePage) => {
+        let selectedFilmsIds
+        if (!genreType) {
+            selectedFilmsIds = allFilmsIds
+        } else {
+            selectedFilmsIds = allFilms.filter(film => film.genre.toLowerCase() === genreType.toLowerCase()).map(film => film.id)
+        }
+
+        const filmsLength = selectedFilmsIds.length
+        if (countOfFilmsInLikePage < filmsLength) {
+            return selectedFilmsIds.slice(0, countOfFilmsInLikePage)
+        } else {
+            return selectedFilmsIds
+        }
+    }
+)
+
 export const getAllFilmsIdsLength = (genreType) => createSelector(
     state => state.films.ids,
     selectFilms,
-    state => state.films.countOfFilmsInPage,
-    (allFilmsIds, allFilms, countOfFilmsInPage) => {
+    (allFilmsIds, allFilms) => {
         let selectedFilmsIds
         if (!genreType) {
             selectedFilmsIds = allFilmsIds
@@ -94,6 +121,14 @@ export const canShowMore = (genreType) => createSelector(
     state => state.films.countOfFilmsInPage,
     (allSelectedFilmsIdsLength, countOfFilmsInPage) => {
         return (countOfFilmsInPage < allSelectedFilmsIdsLength)
+    }
+)
+
+export const canShowMoreOfLike = (genreType) => createSelector(
+    getAllFilmsIdsLength(genreType),
+    state => state.films.countOfFilmsInLikePage,
+    (allSelectedFilmsIdsLength, countOfFilmsInLikePage) => {
+        return (countOfFilmsInLikePage < allSelectedFilmsIdsLength)
     }
 )
 
