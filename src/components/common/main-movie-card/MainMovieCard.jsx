@@ -61,8 +61,6 @@ const MainMovieCard = ({id}) => {
 
                             <ButtonViewMyList/>
 
-                            <a href="add-review.html" className="btn movie-card__button">Add review</a>
-
                         </div>
                     </div>
                 </div>
